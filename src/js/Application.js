@@ -49,18 +49,23 @@ export default class Application extends EventEmitter {
       allRequests = [...allRequests, ...data.results]
       url = data.next
     }
-   const allInfo = allRequests.map(planet => {
-        return this._render({
-          name: planet.name,
-          terrain: planet.terrain,
-          population: planet.population
-        })
-    })
-    
-    document.querySelector(".box").innerHTML = allInfo
+
+   return allRequests 
+
 
   }
-  _create(){}
+  _create(){
+    const allData  = this._load()
+    const allInfo = allData.map(planet => {
+      return this._render({
+        name: planet.name,
+        terrain: planet.terrain,
+        population: planet.population
+      })
+  })
+  
+  document.querySelector(".box").innerHTML = allInfo
+  }
   _startLoading(){}
   _stopLoading(){
     if(document.querySelector(".box").innerHTML !== ''){
