@@ -54,21 +54,30 @@ export default class Application extends EventEmitter {
 
 
   }
-  _create(){
-    const allData  = this._load()
-    const allInfo = allData.map(planet => {
-      return this._render({
-        name: planet.name,
-        terrain: planet.terrain,
-        population: planet.population
-      })
-  })
+   _create(){
+    const allData  =  this._load()
+    allData.then(res => {
+    const allInfo =  res.map(planet => {
+            return this._render({
+              name: planet.name,
+              terrain: planet.terrain,
+              population: planet.population
+            })
+        })
+        document.querySelector(".box").innerHTML = allInfo
+    })
   
-  document.querySelector(".box").innerHTML = allInfo
   }
-  _startLoading(){}
+  _startLoading(){
+    const box = document.querySelector(".box").innerHtml
+    if(box === ''){
+      document.querySelector("progress").style.display = "block"
+    }
+  }
+
   _stopLoading(){
-    if(document.querySelector(".box").innerHTML !== ''){
+    const box = document.querySelector(".box").innerHtml
+    if(box !== ''){
       document.querySelector("progress").style.display = "none"
     }
   }
