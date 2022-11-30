@@ -1,4 +1,3 @@
-import "./scss/app.scss";
 import Application from "./js/Application";
 
 window.addEventListener("DOMContentLoaded", () => {
